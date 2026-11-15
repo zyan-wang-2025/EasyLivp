@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
+    
+    <AssemblyName>EasyLivp</AssemblyName>
+    <RootNamespace>EasyLivp</RootNamespace>
+
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LibHeifSharp" Version="3.2.0" />
+    <PackageReference Include="LibHeif.Native.Runtime" Version="1.20.2" /> 
+    <PackageReference Include="LibVLCSharp.WinForms" Version="3.8.2" />
+    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.21" />
+  </ItemGroup>
+
+  <!-- 自动化发布整理脚本（稳定版） -->
+  <Target Name="PostPublish" AfterTargets="Publish">
+    <ItemGroup>
+      <!-- 收集所有散落的 dll (比如 libheif.dll 等) -->
+      <OtherDlls Include="$(PublishDir)*.dll" />
+      <!-- 收集 VLC 的所有文件 -->
+      <VlcFiles Include="$(PublishDir)libvlc\**\*" />
+    </ItemGroup>
+    
+    <!-- 1. 创建 Support 文件夹 -->
+    <MakeDir Directories="$(PublishDir)Support" />
+    
+    <!-- 2. 复制 VLC 到 Support 并删除原目录 -->
+    <Copy SourceFiles="@(VlcFiles)" DestinationFiles="@(VlcFiles->'$(PublishDir)Support\libvlc\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <RemoveDir Directories="$(PublishDir)libvlc" />
+    
+    <!-- 3. 把散落的 dll 移入 Support -->
+    <Move SourceFiles="@(OtherDlls)" DestinationFolder="$(PublishDir)Support" />
+    
+    <!-- 4. 复制脚本和说明 -->
+    <Copy SourceFiles="$(ProjectDir)ClearReg.bat;$(ProjectDir)Readme.txt" DestinationFolder="$(PublishDir)" />
+  </Target>
+
+</Project>
