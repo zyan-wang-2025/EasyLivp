@@ -23,6 +23,41 @@
 <img width="266" height="167" alt="image" src="https://github.com/user-attachments/assets/9a670540-e6c4-40bb-8a3f-2e6909540d90" />
 
 
+##  下载方式
+
+1. **直接从GitHub的Releases处下载：**
+
+点击右侧的Releases：  
+
+
+<img width="1186" height="698" alt="image" src="https://github.com/user-attachments/assets/5cddc70c-35fc-46c0-b5b6-33461d3c8e6c" />
+
+
+点击页面中的EasyLivp.zip，即可启动下载。
+
+<img width="1781" height="710" alt="image" src="https://github.com/user-attachments/assets/60dbd4d3-48cc-4b23-9c32-3401cc1299bb" />  
+
+
+    
+
+
+    
+
+2. **百度网盘下载：**
+
+
+通过网盘分享的文件：EasyLivp.zip
+链接: https://pan.baidu.com/s/17cW3Mzlviz3Dbcm-CeGtzQ?pwd=1234 提取码: 1234
+
+
+
+
+---
+
+
+
+
+
 ##  主要功能
 
 -  **原生预览**：直接在软件内查看 .livp 文件（静态 HEIC 图片 + 动态 MOV 视频），支持完美还原 Live 图效果。
